@@ -22,4 +22,14 @@ router.get("/", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+  db("zoos")
+    .insert(req.body, "id")
+    .then(zoos => {
+      res.status(200).json(zoos);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+});
 module.exports = router;
