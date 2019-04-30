@@ -22,6 +22,17 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:id", (req, res) => {
+  db("zoos")
+    .where({ id: req.params.id })
+    .then(zoos => {
+      res.status(200).json(zoos);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+});
+
 router.post("/", (req, res) => {
   db("zoos")
     .insert(req.body, "id")
